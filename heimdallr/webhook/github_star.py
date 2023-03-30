@@ -9,12 +9,12 @@ class GithubStarWebhook(WebhookBase):
 
     def parse(self) -> (str, str, str):
         action = self.message["action"]
-        repo_name = self.message["repository"]["full_name"]
+        repo_name = self.message["repository"]["name"]
         from_user = self.message["sender"]["login"]
         stars = self.message["repository"]["stargazers_count"]
-        title = f"Activity on {repo_name}"
+        title = f"{repo_name}"
         if action == "created":
-            body = f"{from_user} starred {repo_name}\nStars: {stars}"
+            body = f"{from_user} 给你的项目点了 ⭐️ \nStars: {stars}"
         elif action == "deleted":
             body = f"{from_user} removed star on {repo_name}\nStars: {stars}"
         else:
